@@ -15,6 +15,9 @@
 
     $row=$sql2->fetch();
 
+    $sql3 = $db->query("SELECT COUNT(*) FROM `reservations` WHERE id_user = $id");
+    $compteur2 = $sql3->fetchColumn();
+
     
 ?>
 <section>
@@ -50,8 +53,8 @@
                 <a href="#" class="btn btn-primary mb-3 <?php  if($compteur < 1){ echo 'disabled'; } ?>"
                     data-toggle="modal" data-target="#listingAnnonces">Voir mes annonces  <span class="badge badge-primary badge-pill"><?= $compteur; ?></span>
                     </a>
-                <a href="#" class="btn btn-primary mb-3 <?php  if($compt < 1){ echo 'disabled'; } ?>"
-                    data-toggle="modal" data-target="#listingResa">Voir mes réservations <span class="badge badge-primary badge-pill">5</span></a>
+                <a href="#" class="btn btn-primary mb-3 <?php  if($compteur2 < 1){ echo 'disabled'; } ?>"
+                    data-toggle="modal" data-target="#mesreservations">Voir mes réservations <span class="badge badge-primary badge-pill"><?= $compteur2; ?></span></a>
             </div>
             <div class="col-md-12 text-center pt-5 my-2">
                 <a class="btn btn-info back" href="annonces.php">Retour aux annonces</a>
@@ -82,4 +85,28 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="mesreservations" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog listings" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header" id="popup" class="overlay">
+                <h5 class="modal-title" id="exampleModalLabel">Mes réservations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+            <div class="row ">
+            <?php
+                displayreza($id);
+            ?>
+             </div>
+        
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php require('assets/footer.php'); ?>

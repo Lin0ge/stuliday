@@ -52,13 +52,14 @@ include('assets/nav.php');
                     $sth->bindValue(':end_date',$end_date);
                     
                     $sth->execute();
-                    echo'Ca a marché !';
+                    header("Location:profile.php");
                 }
 
             }
     
+        }else {echo "Photo Trop lourde";
+            header("Location:create-annonce.php");
         }
-
 
     }
 ?>
